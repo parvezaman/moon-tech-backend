@@ -16,7 +16,7 @@ app.use(express.json());
 // mongodb+srv://<username>:<password>@cluster0.kbuol.mongodb.net/?retryWrites=true&w=majority
 // mongodb+srv://<username>:<password>@cluster0.kbuol.mongodb.net/?retryWrites=true&w=majority
 // const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.q66zrl2.mongodb.net/?retryWrites=true&w=majority`;
-console.log(process.env.DB_USER);
+// console.log(process.env.DB_USER);
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.kbuol.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
@@ -36,7 +36,7 @@ const run = async () => {
             res.send({ status: true, data: product });
         });
 
-        app.post("/product", async (req, res) => {
+        app.post("/products", async (req, res) => {
             const product = req.body;
 
             const result = await productCollection.insertOne(product);
@@ -44,7 +44,7 @@ const run = async () => {
             res.send(result);
         });
 
-        app.delete("/product/:id", async (req, res) => {
+        app.delete("/products/:id", async (req, res) => {
             const id = req.params.id;
 
             const result = await productCollection.deleteOne({ _id: ObjectId(id) });
